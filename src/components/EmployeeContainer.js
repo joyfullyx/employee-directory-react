@@ -10,23 +10,17 @@ class EmployeeContainer extends React.Component {
         search: "",
         employees: [],
         employeesFiltered: [],
-        
+        // TODO: add name/dob in asc/desc order here??
     };
 
     // default on reload
+    // TODO: ??????????????????????
     componentDidMount() {
         API.search()
             .then((res) => {
-                console.log(res);
+                console.log(res)
                 this.setState({
-                    employees: res.data.results.map(employee => ({
-                        picture: employee.picture.thumbnail,
-                        firstName: employee.name.first,
-                        lastName: employee.name.last,
-                        phone: employee.phone,
-                        email: employee.email,
-                        dob: employee.dob
-                    }))
+                    employees: res.data.results
                 })
             })
             .catch(err => console.log(err))
