@@ -1,6 +1,7 @@
 import React from 'react'
 import API from '../utils/API';
 import Header from './Header';
+import ResultsList from './ResultsList';
 import SearchForm from './SearchForm';
 
 class EmployeeContainer extends React.Component {
@@ -23,6 +24,7 @@ class EmployeeContainer extends React.Component {
             <div>
                 <Header />
                 <SearchForm />
+                <ResultsList />
             </div>
         )
     }
