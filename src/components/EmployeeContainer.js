@@ -22,6 +22,7 @@ class EmployeeContainer extends React.Component {
         return (
             <div>
                 <Header />
+                <SearchForm />
             </div>
         )
     }
