@@ -37,10 +37,24 @@ class EmployeeContainer extends React.Component {
   }
 
   searchEmployee = (firstName) => {
-    API.search(firstName)
-      .then((res) => this.setState({ employees: res.data.data }))
-      .catch((err) => console.log(err));
+    // API.search(firstName)
+    //   .then((res) =>
+    //   {this.setState({ employees: res.data.data })
+    //   console.log('res:', res)})
+    //   .catch((err) => console.log(err));
+    const tempFiltered = this.state.employees.filter((employee) => {
+      console.log("includes: ", employee.firstName.includes(firstName));
+
+      if (employee.firstName.includes(firstName)) {
+        return employee;
+      }
+    });
+    this.setState({
+      employeesFiltered: tempFiltered,
+    });
   };
+
+//   sort / map 
 
   handleInputChange = (event) => {
     const name = event.target.name;
@@ -69,17 +83,35 @@ class EmployeeContainer extends React.Component {
         />
         <TableHeader />
         <div>
-          {[...this.state.employees].map((employee) => (
-            <ResultsList
-              picture={[employee.picture]}
-              name={employee.firstName + " " + employee.lastName}
-              phone={employee.phone}
-              email={employee.email}
-              dob={employee.dob.date}
-              key={employee.id}
-              //   results={this.state.results}
-            />
-          ))}
+          {this.state.employeesFiltered.length > 0 ? (
+            <div>
+              {[...this.state.employeesFiltered].map((employee) => (
+                <ResultsList
+                  picture={[employee.picture]}
+                  name={employee.firstName + " " + employee.lastName}
+                  phone={employee.phone}
+                  email={employee.email}
+                  dob={employee.dob.date}
+                  key={employee.id}
+                  //   results={this.state.results}
+                />
+              ))}
+            </div>
+          ) : (
+            <div>
+              {[...this.state.employees].map((employee) => (
+                <ResultsList
+                  picture={[employee.picture]}
+                  name={employee.firstName + " " + employee.lastName}
+                  phone={employee.phone}
+                  email={employee.email}
+                  dob={employee.dob.date}
+                  key={employee.id}
+                  //   results={this.state.results}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     );
