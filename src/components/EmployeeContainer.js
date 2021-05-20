@@ -4,6 +4,7 @@ import Header from "./Header";
 import TableHeader from "./TableHeader";
 import ResultsList from "./ResultsList";
 import SearchForm from "./SearchForm";
+// import Moment from 'react-moment';
 
 class EmployeeContainer extends React.Component {
   state = {
@@ -21,7 +22,7 @@ class EmployeeContainer extends React.Component {
       .then((res) => {
         console.log(res);
         this.setState({
-          employees: res.data.results.map((employee) => ({
+            employees: res.data.results.map((employee) => ({
               picture: employee.picture.large,
               firstName: employee.name.first,
               lastName: employee.name.last,
@@ -97,6 +98,7 @@ class EmployeeContainer extends React.Component {
 
   render() {
     return (
+        
       <div>
         <Header />
         <SearchForm
