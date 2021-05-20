@@ -21,7 +21,7 @@ function SearchForm(props) {
           className="btn btn-outline-secondary"
         //   id="button-addon2"
         >
-          Search now!
+          Search!
         </button>
       {/* </div> */}
     </form>
