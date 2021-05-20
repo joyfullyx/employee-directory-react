@@ -29,6 +29,7 @@ class EmployeeContainer extends React.Component {
               phone: employee.phone,
               email: employee.email,
               dob: employee.dob,
+              key: employee.id,
           }),
         )});
       })
@@ -116,7 +117,9 @@ class EmployeeContainer extends React.Component {
             phone={employee.phone}
             email={employee.email}
             dob={employee.dob.date}
+            key={employee.id}
             //   results={this.state.results}
+            limit='10'
           />
             ))}
         </div>

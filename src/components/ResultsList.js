@@ -8,7 +8,7 @@ function ResultsList(props) {
       <tbody>
         <tr>
           <td>
-            <img alt={props.last} src={props.picture}>
+            <img alt={props.last} src={props.picture} key={props.id}>
               {/* {props.picture} */}
             </img>
           </td>
@@ -17,6 +17,7 @@ function ResultsList(props) {
           <td>{props.name}</td>
           <td>{props.phone}</td>
           <td>{props.email}</td>
+          <td>{props.id}</td>
           <td>
             <Moment className="text-center" format="MM/DD/YYYY">
               {props.dob}
