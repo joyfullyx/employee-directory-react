@@ -11,18 +11,26 @@ function SearchForm(props) {
           name="search"
           type="text"
           className="form-control"
-          placeholder="search employee"
+          placeholder="search employee by first name (case sensitive)"
           id="search"
         ></input>
 
         <button
           type="submit"
           onClick={props.handleFormSubmit}
-          className="btn btn-outline-secondary"
+          className="btn btn-success"
         //   id="button-addon2"
         >
           Search!
         </button>
+          <button
+          type="button"
+          onClick={props.handleReload}
+          className="btn btn-primary"
+          >
+            Refresh Page
+          </button>
+       
       {/* </div> */}
     </form>
   );
