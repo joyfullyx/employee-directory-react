@@ -4,7 +4,6 @@ import Header from "./Header";
 import TableHeader from "./TableHeader";
 import ResultsList from "./ResultsList";
 import SearchForm from "./SearchForm";
-// import Moment from 'react-moment';
 
 class EmployeeContainer extends React.Component {
   state = {
@@ -12,24 +11,15 @@ class EmployeeContainer extends React.Component {
     employees: [],
     employeesFiltered: [],
     error: "",
-    // TODO: add name/dob in asc/desc order here??
     employeesSorted: [],
   };
 
-  // default on reload
+  // default on page load/reload
   componentDidMount() {
     API.search()
       .then((res) => {
         console.log(res);
         this.setState({
-          //   employees: res.data.results.map((employee) => ({
-          //     picture: employee.picture.large,
-          //     firstName: employee.name.first,
-          //     lastName: employee.name.last,
-          //     phone: employee.phone,
-          //     email: employee.email,
-          //     dob: employee.dob,
-          //     key: employee.id,
           employees: res.data.results,
           employeesFiltered: res.data.results,
           //   })
@@ -39,23 +29,34 @@ class EmployeeContainer extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  // refresh page on 'refresh page' button
   handleReload = (event) => {
     event.preventDefault();
     this.componentDidMount();
+    this.setState({
+        search: ""
+    })
   };
 
+  //search for employee by first name
   searchEmployee = (firstName) => {
     const tempFiltered = this.state.employees.filter((employee) => {
       if (employee.name.first.includes(firstName)) {
         return employee;
+      } else if (employee.name.first.includes(!firstName)) {
+        return employee;
       }
+      return false;
     });
     this.setState({
       employeesFiltered: tempFiltered,
     });
   };
 
-//   Shoutout to stackexchange for help on this one!
+
+  // sort employees alphabetically in asc/desc order by first name
+  // Shoutout to stackexchange for help on this one!
+  // https://codereview.stackexchange.com/questions/236555/sorting-a-list-in-ascending-descending-order-with-a-button-toggle  
   sortEmployees = () => {
     this.setState({
       employeesSorted: this.state.order
@@ -73,11 +74,13 @@ class EmployeeContainer extends React.Component {
     });
   };
 
+  // click event handler for sorting names alphabetically
   handleSort = (event) => {
     event.preventDefault();
     this.sortEmployees();
   };
 
+  // event handler for search input field
   handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -88,6 +91,7 @@ class EmployeeContainer extends React.Component {
     console.log("searched for: ", this.state);
   };
 
+  // event handler for search button
   handleFormSubmit = (event) => {
     console.log("clickkkk");
     event.preventDefault();
@@ -97,6 +101,7 @@ class EmployeeContainer extends React.Component {
     });
   };
 
+  // render this on page!
   render() {
     return (
       <div>
@@ -112,6 +117,7 @@ class EmployeeContainer extends React.Component {
         <div>
           {this.state.employeesFiltered.length > 0 ? (
             <div>
+              {/* map to display searched employee from employeesFiltered array and render ResultsList compoment */}
               {this.state.employeesFiltered.map((employee, key) => (
                 <ResultsList
                   picture={employee.picture.large}
@@ -120,12 +126,12 @@ class EmployeeContainer extends React.Component {
                   email={employee.email}
                   dob={employee.dob.date}
                   key={key}
-                  //   results={this.state.results}
                 />
               ))}
             </div>
           ) : (
             <div>
+              {/* if no search, render all employees */}
               {this.state.employees.map((employee, key) => (
                 <ResultsList
                   picture={employee.picture.large}
@@ -134,7 +140,6 @@ class EmployeeContainer extends React.Component {
                   email={employee.email}
                   dob={employee.dob.date}
                   key={key}
-                  //   results={this.state.results}
                 />
               ))}
             </div>

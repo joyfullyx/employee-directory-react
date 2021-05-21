@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/ResultsList.css";
+// use Moment to reformat date in 'dob' from UTC to something more legible and human 
 import Moment from "react-moment";
 
 function ResultsList(props) {
@@ -9,7 +10,6 @@ function ResultsList(props) {
         <tr>
           <td>
             <img alt={props.last} src={props.picture} key={props.id}>
-              {/* {props.picture} */}
             </img>
           </td>
           <td>{props.first}</td>

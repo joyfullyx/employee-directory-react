@@ -9,6 +9,7 @@ export default function TableHeader(props) {
       <thead>
         <tr>
           <th>Image</th>
+          {/* click handler for sorting names alphabetically */}
           <th onClick={props.handleSort}>Name</th>
           <th>Phone</th>
           <th>Email</th>
